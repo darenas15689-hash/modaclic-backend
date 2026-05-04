@@ -27,3 +27,10 @@ class UsuarioSchema(Schema):
     usuario = fields.Str(required=True)
     password = fields.Str(required=True)
     rol = fields.Str(required=True)
+from marshmallow import Schema, fields
+
+class AuthUserSchema(Schema):
+    id = fields.Int()
+    nombre = fields.Str()
+    email = fields.Str()
+    rol = fields.Str()

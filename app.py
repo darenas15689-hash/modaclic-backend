@@ -3,9 +3,11 @@ from extensions import db, migrate, ma, cors
 from api import api_bp
 from flask_cors import CORS  # importamos CORS directamente para configurarlo bien
 from api.inventario import inventario_bp
+from api.auth import auth_bp
+
 
 app = Flask(__name__)
-
+CORS(app, origins=["http://localhost:5173"])
 # 🔹 CONFIGURACIÓN DE BASE DE DATOS (MySQL 9.5)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     'mysql+pymysql://root:200514@localhost:3306/modaclic'
@@ -42,7 +44,7 @@ def handle_options_request():
 app.register_blueprint(api_bp, url_prefix='/api')
 from api.inventario import inventario_bp
 app.register_blueprint(inventario_bp, url_prefix="/api")
-
+app.register_blueprint(auth_bp, url_prefix="/auth")
 # 🔹 RUTA PRINCIPAL (PÁGINA DE INICIO)
 @app.route('/')
 def index():
